@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ghobot — GitHub Pages</title>
+<meta name="description" content="Index of active GitHub Pages sites for ghobot">
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --border: #e4e2dd;
+    --text: #1d1b17;
+    --text-muted: #6b6760;
+    --accent: #8a5a3b;
+    --accent-bg: #f0e4d8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17160f;
+      --surface: #201e16;
+      --border: #39362a;
+      --text: #f0ede4;
+      --text-muted: #a39f91;
+      --accent: #d9a876;
+      --accent-bg: #332a1d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 16px 80px;
+  }
+  header h1 {
+    font-size: 1.6rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  header p {
+    color: var(--text-muted);
+    margin: 0 0 28px;
+    font-size: 0.95rem;
+  }
+  input#search {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  input#search:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+  }
+  ul#list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  li.item {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  li.item a.title {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  li.item a.title:hover { color: var(--accent); }
+  .desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-top: 4px;
+  }
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .badge {
+    background: var(--accent-bg);
+    color: var(--accent);
+    border-radius: 999px;
+    padding: 2px 9px;
+    font-weight: 600;
+    font-size: 0.72rem;
+  }
+  .repo-link {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .repo-link:hover { text-decoration: underline; }
+  #empty {
+    display: none;
+    color: var(--text-muted);
+    padding: 24px 0;
+    text-align: center;
+  }
+  footer {
+    margin-top: 40px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>GitHub Pages</h1>
+    <p id="count"></p>
+    <input id="search" type="text" placeholder="Filter by name or description…" autocomplete="off">
+  </header>
+
+  <ul id="list"></ul>
+  <p id="empty">No matches.</p>
+
+  <footer>Generated from the GitHub Pages API. Last checked: <span id="checked-date"></span>.</footer>
+</div>
+
+<script>
+  const sites = [
+    { name: "or-sustainability-app", desc: "OR Sustainability 360 Panorama (A-Frame) — migrated from Glitch", url: "https://ghobot.github.io/or-sustainability-app/", repo: "https://github.com/ghobot/or-sustainability-app", private: true, updated: "2026-10-02" },
+    { name: "or-tour-app", desc: "OR 360 Virtual Tour (Marzipano) — migrated from Glitch", url: "https://ghobot.github.io/or-tour-app/", repo: "https://github.com/ghobot/or-tour-app", private: true, updated: "2026-10-02" },
+    { name: "Hubs-Virtual-Rooms", desc: "Website of Hubs VR rooms for anatomy course", url: "https://ghobot.github.io/Hubs-Virtual-Rooms/", repo: "https://github.com/ghobot/Hubs-Virtual-Rooms", private: true, updated: "2026-10-01" },
+    { name: "vocabulary_lessons", desc: "", url: "https://ghobot.github.io/vocabulary_lessons/", repo: "https://github.com/ghobot/vocabulary_lessons", private: false, updated: "2026-09-28" },
+    { name: "sketchfab-catologue", desc: "", url: "https://ghobot.github.io/sketchfab-catologue/", repo: "https://github.com/ghobot/sketchfab-catologue", private: true, updated: "2026-04-13" },
+    { name: "quantum-mechanics-cpas", desc: "", url: "https://ghobot.github.io/quantum-mechanics-cpas/", repo: "https://github.com/ghobot/quantum-mechanics-cpas", private: false, updated: "2026-03-27" },
+    { name: "nyulangone-immersive-classroom", desc: "", url: "https://ghobot.github.io/nyulangone-immersive-classroom/", repo: "https://github.com/ghobot/nyulangone-immersive-classroom", private: false, updated: "2025-12-05" },
+    { name: "coaching-tra", desc: "", url: "https://ghobot.github.io/coaching-tra/", repo: "https://github.com/ghobot/coaching-tra", private: false, updated: "2025-09-18" },
+    { name: "splat_repo", desc: "Repository of gaussian splats", url: "https://ghobot.github.io/splat_repo/", repo: "https://github.com/ghobot/splat_repo", private: true, updated: "2025-09-08" },
+    { name: "iime-me-2025", desc: "Presentation to IIME about me and my work", url: "https://ghobot.github.io/iime-me-2025/", repo: "https://github.com/ghobot/iime-me-2025", private: false, updated: "2025-07-02" },
+    { name: "larynx-splat", desc: "", url: "https://ghobot.github.io/larynx-splat/", repo: "https://github.com/ghobot/larynx-splat", private: true, updated: "2025-06-05" },
+    { name: "blog", desc: "Blog", url: "https://ghobot.github.io/blog/", repo: "https://github.com/ghobot/blog", private: false, updated: "2025-01-23" },
+    { name: "medicine-360-tour", desc: "Virtual Tour of medicine floor of NYU Langone Tisch Hospital", url: "https://ghobot.github.io/medicine-360-tour/", repo: "https://github.com/ghobot/medicine-360-tour", private: false, updated: "2020-01-22" },
+    { name: "kimmel_draft", desc: "Draft for review of Kimmel images", url: "https://ghobot.github.io/kimmel_draft/", repo: "https://github.com/ghobot/kimmel_draft", private: false, updated: "2018-10-04" },
+    { name: "vr-liver", desc: "A-Frame boilerplate with 3D scanned livers", url: "https://ghobot.github.io/vr-liver/", repo: "https://github.com/ghobot/vr-liver", private: false, updated: "2017-09-25" },
+    { name: "intro-vr-meded", desc: "Introduction to VR in Medical Education", url: "https://ghobot.github.io/intro-vr-meded/", repo: "https://github.com/ghobot/intro-vr-meded", private: false, updated: "2017-06-27" },
+    { name: "altered-realities-gir", desc: "2017 GIR Digital Demo on Altered Realities in Medical Education", url: "https://ghobot.github.io/altered-realities-gir/", repo: "https://github.com/ghobot/altered-realities-gir", private: false, updated: "2017-05-17" },
+    { name: "innovation-space-blog", desc: "", url: "https://ghobot.github.io/innovation-space-blog/", repo: "https://github.com/ghobot/innovation-space-blog", private: false, updated: "2017-02-03" },
+    { name: "iimecardboard", desc: "IIME info page for cardboard demos", url: "https://ghobot.github.io/iimecardboard/", repo: "https://github.com/ghobot/iimecardboard", private: false, updated: "2016-12-01" },
+    { name: "basement-weather", desc: "Simple way to know if it's raining outside", url: "https://ghobot.github.io/basement-weather/", repo: "https://github.com/ghobot/basement-weather", private: false, updated: "2016-05-02" },
+    { name: "structure_test", desc: "", url: "https://ghobot.github.io/structure_test/", repo: "https://github.com/ghobot/structure_test", private: false, updated: "2016-04-29" }
+  ];
+
+  const listEl = document.getElementById("list");
+  const countEl = document.getElementById("count");
+  const emptyEl = document.getElementById("empty");
+  const searchEl = document.getElementById("search");
+
+  function render(items) {
+    listEl.innerHTML = "";
+    items.forEach(site => {
+      const li = document.createElement("li");
+      li.className = "item";
+      li.innerHTML = `
+        <a class="title" href="${site.url}" target="_blank" rel="noopener">${site.name}</a>
+        ${site.desc ? `<div class="desc">${site.desc}</div>` : ""}
+        <div class="meta">
+          ${site.private ? '<span class="badge">private repo</span>' : ""}
+          <span>updated ${site.updated}</span>
+          <a class="repo-link" href="${site.repo}" target="_blank" rel="noopener">source →</a>
+        </div>
+      `;
+      listEl.appendChild(li);
+    });
+    emptyEl.style.display = items.length ? "none" : "block";
+  }
+
+  countEl.textContent = `${sites.length} active Pages sites`;
+
+  searchEl.addEventListener("input", () => {
+    const q = searchEl.value.trim().toLowerCase();
+    const filtered = sites.filter(s =>
+      s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q)
+    );
+    render(filtered);
+  });
+
+  render(sites);
+  document.getElementById("checked-date").textContent = "2026-10-02";
+</script>
+</body>
+</html>
